@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+</head>
+<body>
+    <h2>Tasks:</h2>
+
+    <form method="POST" action="{% url 'home' %}">
+        <!-- in this form the action is for when you click the button what you want to happen reload the page = url to the home page home is found in the urls.py when we create the path to the HomeView -->
+        {% csrf_token %}   
+        {{ form }}  
+        <input type="submit" name='create' value="Create" />
+    </form>
+
+    <ul>
+        {% for task in task_list %}
+            <li><a href="{% url 'task_detail' task.id %}">{{ task.description }}</a></li>
+        {% endfor %}    
+    </ul>
+</body>
+</html>
